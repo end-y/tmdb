@@ -91,3 +91,13 @@ export const get_films_by_actor = async (id) =>{
     console.log(error)
   }
 }
+
+export const get_tvSeries_by_id = async (id) => {
+  try {
+    const url = `https://api.themoviedb.org/3/tv/${id}?language=en-US`;
+    const res = await fetch(url, options)
+    return res.json()
+  } catch (error) {
+    console.log(error)
+  }
+}

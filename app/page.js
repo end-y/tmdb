@@ -10,7 +10,6 @@ export default async function Home({searchParams}) {
   let people = false;
   let movie = false;
   let tv_shows = false;
-  console.log(searchParams.page)
   if(searchParams.hasOwnProperty("q")){
     people = results.filter(e => e.media_type == "person")
     movie = results.filter(e => e.media_type == "movie")
@@ -70,7 +69,7 @@ export default async function Home({searchParams}) {
                 tv_shows.length > 0 &&
                 tv_shows.map(e => {
                   return(
-                   <MediaCard key={e.id} e={e} />
+                   <MediaCard type='tv' key={e.id} e={e} />
                   )
                 })
               }
