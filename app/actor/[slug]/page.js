@@ -4,16 +4,18 @@ import Image from 'next/image'
 import React from 'react'
 
 export default async function actor({params}) {
-    let {name,profile_path,id, original_name, birthday, place_of_birth} = await get_actor_by_id(params.slug)
+    let {name,profile_path,id, original_name, birthday, place_of_birth, biography} = await get_actor_by_id(params.slug)
     let {cast} = await get_films_by_actor(params.slug)
     return (
         <section key={id}>
             <div className='flex space-x-5' >
-                <Image unoptimized priority alt={original_name} className='rounded-lg overflow-hidden mb-3 object-cover w-64' src={profile_path ? "http://image.tmdb.org/t/p/w500"+profile_path : "https://placehold.co/310x460?text=?"} width={150} height={150} />
-                <div className='bg-white rounded p-3 w-full space-y-5 opacity-80'>
+                <Image unoptimized priority alt={original_name} className=' xl:block hidden rounded-lg overflow-hidden mb-3 object-cover w-1/4' src={profile_path ? "http://image.tmdb.org/t/p/w500"+profile_path : "https://placehold.co/310x460?text=?"} width={150} height={150} />
+                <div className=' bg-white rounded p-3 w-full space-y-5 opacity-80'>
+                    <Image unoptimized priority alt={original_name} className='float-right xl:hidden sm:block hidden rounded-lg overflow-hidden mb-3 object-cover ' src={profile_path ? "http://image.tmdb.org/t/p/w500"+profile_path : "https://placehold.co/310x460?text=?"} width={150} height={150} />
                     <h1 className='text-3xl text-black'>Full Name: {name}</h1>
                     <p className='text-3xl text-black'>Birthday: {new Date(birthday).toLocaleDateString()}</p>
                     <p className='text-3xl text-black'>Place of Birth: {place_of_birth}</p>
+                    <p className='text-1xl text-black'>About: {biography}</p>
                 </div>
             </div>
             {cast && cast.length > 0 && <><h1 className='text-5xl mt-7'>Movies</h1>
